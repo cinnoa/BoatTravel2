@@ -252,8 +252,6 @@ public class VoyageManager {
                 b.setInvulnerable(true);
                 b.setSilent(true);
                 b.setPersistent(false);
-                b.setCollidable(false);
-                try { b.setAI(false); } catch (Throwable ignored) {}
                 b.setVelocity(new Vector());
             });
         } catch (Throwable ex) {
