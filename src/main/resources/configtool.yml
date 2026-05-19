@@ -1,0 +1,13 @@
+plugin: BoatTravel
+version: 12
+files:
+  - path: config.yml
+    description: Travel mechanics and full messages/colors styling tree.
+  - path: docks.yml
+    description: Registered docks with their sign locations and home water positions.
+  - path: routes.yml
+    description: Named routes with waypoints, boat type, and enabled flag.
+  - path: travel-signs.yml
+    description: Voyage signs and the route name they reference.
+  - path: stats.yml
+    description: Per-player and global voyage statistics with a self-describing schema.

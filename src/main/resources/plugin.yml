@@ -1,0 +1,43 @@
+name: BoatTravel
+version: '12'
+main: dev.bekololek.boattravel.Main
+api-version: '1.20'
+description: Same-world ferry network with dock signs, saved routes, and voyage signs
+authors: [Cinnoa]
+
+softdepend: [Vault, PlaceholderAPI, Towny]
+
+commands:
+  boattravel:
+    description: BoatTravel main command
+    usage: /boattravel <reload|cancel|docks|info|sethome|route|stats|music>
+    aliases: [bt]
+
+permissions:
+  boattravel.use:
+    description: Click a voyage sign and begin a voyage
+    default: true
+  boattravel.dock:
+    description: Create a dock sign
+    default: op
+  boattravel.travel:
+    description: Create a voyage sign
+    default: op
+  boattravel.cancel:
+    description: Use /boattravel cancel mid-voyage
+    default: true
+  boattravel.list:
+    description: Use /boattravel docks and /boattravel info
+    default: true
+  boattravel.admin:
+    description: Admin commands and setup
+    default: op
+  boattravel.bypass.cost:
+    description: Travel for free regardless of config cost
+    default: op
+  boattravel.stats:
+    description: View own travel statistics
+    default: true
+  boattravel.stats.others:
+    description: View other players' stats
+    default: op

@@ -1,0 +1,204 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# BoatTravel — Same-World Edition
+# Paper 1.20.4  •  Java 17
+#
+# This config controls how voyages move, how things cost, and — most usefully —
+# how every visible piece of text the plugin shows is colored. Edit any value
+# below to re-skin the whole plugin without touching code.
+#
+# Color values accept either:
+#   • A hex string like "#4B22FF"
+#   • A named color like "DARK_GRAY", "WHITE", "RED", "GRAY", "GREEN", etc.
+# Decoration lists accept any of: BOLD, ITALIC, UNDERLINED, STRIKETHROUGH, OBFUSCATED
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+# ── Travel mechanics ─────────────────────────────────────────────────────────
+
+# Multiplier on a base walking speed (4.317 blocks/sec). 6.0 = a brisk cruise.
+travel-speed-multiplier: 6.0
+
+# Economy cost per block of total route distance (needs Vault).
+cost-per-block: 0.0
+
+# Flat fee added per voyage regardless of distance (needs Vault).
+flat-cost: 0.0
+
+# How long a right-click confirmation stays valid (milliseconds).
+confirm-window-ms: 5000
+
+# How many chunks around the moving boat to force-load. 1 is usually plenty.
+chunk-load-radius: 2
+
+# Distance in blocks the cosmetic boat sits below the player's seat point.
+# Tune by +/- 0.1 if your visible boat sits too high or too low.
+boat-visual-y-offset: -0.55
+
+# Seconds the boat lingers at the final waypoint before dock-in. Gives the
+# cinematic "we have arrived" pause.
+arrival-settle-seconds: 2.0
+
+# Toggle: clear lilypads/seagrass/tall_seagrass directly under the moving boat.
+clear-minor-obstacles: true
+
+# Toggle: launch two small fireworks in front of the player when leaving the dock.
+departure-fireworks: true
+departure-firework-color: "#4B22FF"
+departure-firework-fade-color: "#8A63FF"
+
+# Toggle: spawn ambient water-wake particles around the boat during the ride.
+particle-effects: true
+
+# How often (in ticks) wake/particle bursts emit. Higher = lighter on clients.
+# 20 ticks = 1 second. 4 ticks gives a constant gentle stream.
+particle-interval-ticks: 4
+
+# How often (in ticks) gentle ambient sailing sounds play.
+# 70 ticks ≈ once every 3.5 seconds.
+ambient-sound-interval-ticks: 70
+
+# How often (in ticks) the action bar progress HUD refreshes.
+actionbar-update-ticks: 4
+
+# Length of the visual progress bar (number of dots, boat included).
+actionbar-bar-length: 36
+
+
+# ── Departure / arrival cinematic ────────────────────────────────────────────
+
+# Toggle: brief boost effect when the boat first sets off. Pure cosmetic.
+play-departure-sounds: true
+play-arrival-sounds: true
+play-mid-trip-moment: true
+
+
+# ── Disconnect behavior ──────────────────────────────────────────────────────
+# Legacy option kept for compatibility. The plugin always returns disconnected
+# players to their origin and refunds any pending charge on rejoin.
+disconnect-behavior: "ORIGIN"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MESSAGE / STYLE SYSTEM
+#
+# This block governs every color and glyph the plugin shows. Re-skinning the
+# whole thing — chat, action bar, titles, signs, stats — is just editing here.
+# Each leaf has a sensible default if missing, so feel free to delete sections
+# you don't want to customize.
+# ─────────────────────────────────────────────────────────────────────────────
+messages:
+
+  # ── Prefix (the "[NAF]" tag at the start of every message) ────────────────
+  prefix:
+    tag: "NAF"
+    tag-color: "#4B22FF"
+    tag-decorations: [BOLD]
+    bracket-color: "DARK_GRAY"
+
+  # ── Plain message body ────────────────────────────────────────────────────
+  body:
+    # Default color for explanatory text ("You have been charged X for this voyage.")
+    text-color: "GRAY"
+
+    # Highlighted variables embedded in text (dock names, prices, route names)
+    variable-color: "#4B22FF"
+    variable-decorations: [BOLD]
+
+    # Color for error messages and the variable used inside error messages
+    error-color: "GRAY"
+    error-variable-color: "RED"
+
+    # Soft warning color
+    warn-color: "GRAY"
+
+    # Success message colors
+    success-color: "GRAY"
+    success-accent-color: "GREEN"   # the trailing "!" on "Arrived at X!"
+
+  # ── Section headers (✦ Title ✦) ───────────────────────────────────────────
+  header:
+    star-char: "✦"
+    star-color: "WHITE"
+    star-decorations: [BOLD]
+    title-color: "#4B22FF"
+    title-decorations: [BOLD]
+
+  # ── List rows (e.g. "  Foo -> Bar (3 points)") ────────────────────────────
+  list:
+    row-color: "GRAY"
+    row-accent-color: "#4B22FF"
+
+  # ── Usage / help lines (/bt info <dock>) ──────────────────────────────────
+  usage:
+    command-color: "GRAY"
+    variable-color: "#4B22FF"
+    variable-decorations: []        # variables left unbolded by default
+
+  # ── Big titles shown over the screen ──────────────────────────────────────
+  titles:
+    title-color: "#4B22FF"
+    title-decorations: [BOLD]
+    subtitle-label-color: "GRAY"
+    subtitle-value-color: "WHITE"
+    departing-text: "Departing"
+    arrived-text: "Arrived"
+    destination-subtitle-prefix: "Destination: "
+
+  # ── Action bar (the progress HUD while sailing) ───────────────────────────
+  actionbar:
+    boat-char: "⛵"
+    boat-color: "WHITE"
+    boat-decorations: [BOLD]
+    filled-char: "•"
+    empty-char: "•"
+    filled-color: "#4B22FF"
+    empty-color: "DARK_GRAY"
+    bracket-char: "⋯"
+    bracket-color: "DARK_GRAY"
+    label-color: "GRAY"
+    destination-color: "WHITE"
+    destination-decorations: [BOLD]
+    remaining-color: "#4B22FF"
+    remaining-decorations: [BOLD]
+    confirm-text: "Click again to confirm."
+    confirm-color: "GRAY"
+
+  # ── Signs (Dock + Voyage) ─────────────────────────────────────────────────
+  # Both sign types share a header format: ✦ % Title % ✦
+  signs:
+    star-char: "✦"
+    star-color: "WHITE"
+    star-decorations: [BOLD]
+
+    # The obfuscated "%" symbols flanking the title
+    obf-char: "%"
+    obf-color: "#4B22FF"
+    obf-decorations: [BOLD, OBFUSCATED]
+
+    title-color: "WHITE"
+    title-decorations: [BOLD, UNDERLINED]
+    dock-title: "Dock"
+    voyage-title: "Voyage"
+
+    destination-color: "WHITE"      # destination name on a voyage sign
+    town-color: "GRAY"              # Towny town name line
+
+    price-color: "#4B22FF"
+    price-decorations: [BOLD]
+    free-color: "#4B22FF"
+    free-decorations: [BOLD]
+    free-text: "Free"
+
+    unavailable-color: "RED"
+    unavailable-decorations: [BOLD]
+    unavailable-text: "Unavailable"
+
+    wilderness-text: "Wilderness"
+
+  # ── /bt stats output styling ──────────────────────────────────────────────
+  stats:
+    label-color: "GRAY"
+    value-color: "#4B22FF"
+    value-decorations: [BOLD]
+    rank-color: "GRAY"
+    separator-color: "DARK_GRAY"
